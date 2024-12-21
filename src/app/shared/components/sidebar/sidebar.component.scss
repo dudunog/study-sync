@@ -1,0 +1,22 @@
+mat-sidenav-content {
+  padding: 1rem 2rem;
+  height: calc(100vh - 96px);
+}
+
+mat-sidenav {
+  padding: 0.5rem;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+mat-list-item {
+  >span {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
