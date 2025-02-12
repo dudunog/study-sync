@@ -109,7 +109,6 @@ export class CreateScheduleComponent {
   }
 
   deleteSchedule(activityId: string) {
-    console.log("activityId:", activityId)
     const activitiesArray = this.createScheduleForm.get(
       'activities'
     ) as FormArray;
@@ -117,9 +116,6 @@ export class CreateScheduleComponent {
     const activityIndex = activitiesArray.controls.findIndex(
       (activity) => activity.value.id === activityId
     );
-
-    console.log("activitiesArray:", activitiesArray)
-    console.log("activityIndex:", activityIndex)
 
     if (activityIndex !== -1) {
       activitiesArray.removeAt(activityIndex);
@@ -130,7 +126,6 @@ export class CreateScheduleComponent {
     if (this.activitiesForm.valid) {
       const activitiesArray = this.createScheduleForm.get('activities')?.value;
 
-      console.log("this.activitiesForm.value:", this.activitiesForm.value)
       activitiesArray.push({
         ...this.activitiesForm.value,
         id: uuid.v4(),

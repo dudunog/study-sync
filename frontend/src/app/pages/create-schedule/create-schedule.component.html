@@ -75,27 +75,27 @@
     </form>
 
     @if (activities.length > 0) {
-      <div cdkDropList cdkDropListOrientation="horizontal" class="activities-list" (cdkDropListDropped)="drop($event)">
-        @for (activity of activities; track activity.name) {
-        <mat-card class="activity-box" cdkDrag>
-          <button class="delete-icon-button" mat-icon-button (click)="deleteSchedule(activity.id)">
-            <ng-icon name="phosphorTrashSimple" />
-          </button>
-          <mat-card-title>
-            <ng-icon class="priority-icon {{ activity.priority }}" name="phosphorStar" />
-            @if (activity.priority === 'Alta') {
-            <mat-icon>star</mat-icon>
-            }
-            {{ activity.name }}
-          </mat-card-title>
-          <mat-card-content>
-            <!-- 🗓️ {{ activity.data }} ⏰ {{ activity.horario }} -->
-            🗓️ 20/12 ⏰ 08h-09h
-            <mat-chip color="primary">{{ activity.category | activityCategory }}</mat-chip>
-          </mat-card-content>
-        </mat-card>
-        }
-      </div>
+    <div cdkDropList cdkDropListOrientation="horizontal" class="activities-list" (cdkDropListDropped)="drop($event)">
+      @for (activity of activities; track activity.name) {
+      <mat-card class="activity-box" cdkDrag>
+        <button class="delete-icon-button" mat-icon-button (click)="deleteSchedule(activity.id)">
+          <ng-icon name="phosphorTrashSimple" />
+        </button>
+        <mat-card-title>
+          <ng-icon class="priority-icon {{ activity.priority }}" name="phosphorStar" />
+          @if (activity.priority === 'Alta') {
+          <mat-icon>star</mat-icon>
+          }
+          {{ activity.name }}
+        </mat-card-title>
+        <mat-card-content>
+          <!-- 🗓️ {{ activity.data }} ⏰ {{ activity.horario }} -->
+          🗓️ 20/12 ⏰ 08h-09h
+          <mat-chip color="primary">{{ activity.category | activityCategory }}</mat-chip>
+        </mat-card-content>
+      </mat-card>
+      }
+    </div>
     } @else {
     <p class="no-activities-message">Nenhuma atividade por enquanto. Use o formulário acima para adicionar uma
       atividade!</p>
