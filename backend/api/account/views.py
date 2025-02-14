@@ -7,7 +7,6 @@ from account.serializers import ScheduleSerializer
 from account.models import Schedule
 
 @api_view(['GET', 'POST'])
-# Create your views here.
 def schedules(request):
     if request.method == 'GET':
         schedules = Schedule.objects.all()
