@@ -135,5 +135,7 @@ export class CreateScheduleComponent {
     }
   }
 
-  submit() {}
+  submit() {
+    console.log('entrou aqui');
+  }
 }
