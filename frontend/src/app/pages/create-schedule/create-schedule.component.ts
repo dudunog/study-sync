@@ -33,7 +33,7 @@ import {
 } from '@ng-icons/phosphor-icons/regular';
 import { ActivityCategoryPipe } from '../../shared/pipes/activity-category.pipe';
 import * as uuid from 'uuid';
-import { Activity } from '../../shared/interfaces/activity';
+import { Activity } from '../../shared/interfaces/activity.interface';
 import { CreateScheduleService } from '../../shared/services/create-schedule/create-schedule.service';
 import { Router } from '@angular/router';
 
@@ -164,7 +164,7 @@ export class CreateScheduleComponent {
       .execute(title, description, startDate, endDate, visibility, activities)
       .subscribe({
         next: () => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/my-schedules');
         },
         error: () => {
           this.showCreateScheduleFailedMessage.set(true);

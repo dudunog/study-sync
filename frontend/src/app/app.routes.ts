@@ -30,8 +30,8 @@ export const routes: Routes = [
       {
         path: 'my-schedules',
         loadComponent: () =>
-          import('./pages/create-schedule/create-schedule.component').then(
-            (m) => m.CreateScheduleComponent
+          import('./pages/my-schedules/my-schedules.component').then(
+            (m) => m.MySchedulesComponent
           ),
       },
       {

@@ -10,10 +10,10 @@ import { environment } from '../../../../environments/environment';
 export class AuthService {
   baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   signIn(username: string, password: string): Observable<TokenResponse> {
-    return this.http
+    return this.httpClient
       .post<TokenResponse>(`${this.baseUrl}/auth/jwt/create`, {
         username,
         password,

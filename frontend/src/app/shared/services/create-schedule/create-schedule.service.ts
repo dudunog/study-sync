@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { catchError, throwError } from 'rxjs';
-import { CreateScheduleResponse, Visibility } from '../../interfaces/schedule';
-import { Category, Priority } from '../../interfaces/activity';
+import {
+  CreateScheduleResponse,
+  Visibility,
+} from '../../interfaces/schedule.interface';
+import { Category, Priority } from '../../interfaces/activity.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +14,7 @@ import { Category, Priority } from '../../interfaces/activity';
 export class CreateScheduleService {
   baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   execute(
     title: string,
@@ -26,7 +29,7 @@ export class CreateScheduleService {
       priority: Priority;
     }[]
   ) {
-    return this.http
+    return this.httpClient
       .post<CreateScheduleResponse>(`${this.baseUrl}/api-auth/schedule`, {
         title,
         description,

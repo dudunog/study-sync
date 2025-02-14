@@ -15,7 +15,7 @@ export const addAuthorizationHeaderInterceptor: HttpInterceptorFn = (
     const token = authTokenManagerService.getToken() as string;
 
     req = req.clone({
-      headers: req.headers.set('Authorization', token),
+      headers: req.headers.set('Authorization', `Bearer ${token}`),
     });
   }
 
