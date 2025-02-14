@@ -15,7 +15,10 @@ export class SignInService {
   signIn(email: string, password: string) {
     return this.authService.signIn(email, password).pipe(
       tap(() => this.authStore.setAsLoggedIn()),
-      tap(({ token }) => this.authTokenManagerService.setToken(token))
+      tap(({ access, refresh }) => {
+        this.authTokenManagerService.setToken(access);
+        this.authTokenManagerService.setRefreshToken(refresh);
+      })
     );
   }
 

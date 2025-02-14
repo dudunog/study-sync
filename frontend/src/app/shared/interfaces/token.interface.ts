@@ -1,3 +1,4 @@
 export interface TokenResponse {
-  token: string;
+  access: string;
+  refresh: string;
 }

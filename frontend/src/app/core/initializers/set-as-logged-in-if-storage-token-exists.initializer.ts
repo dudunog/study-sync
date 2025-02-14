@@ -9,9 +9,9 @@ export const setAsLoggedInIfStorageTokenExistsInitializerProvider: FactoryProvid
   };
 
 export function setAsLoggedInIfStorageTokenExistsInitializer() {
-  const loginFacadeService = inject(SignInService);
+  const signInService = inject(SignInService);
 
   return () => {
-    loginFacadeService.setAsLoggedInIfStorageTokenExists();
+    signInService.setAsLoggedInIfStorageTokenExists();
   };
 }

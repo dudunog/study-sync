@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -28,14 +33,9 @@ import {
 } from '@ng-icons/phosphor-icons/regular';
 import { ActivityCategoryPipe } from '../../shared/pipes/activity-category.pipe';
 import * as uuid from 'uuid';
-
-interface Activity {
-  id: string;
-  name: string | null;
-  duration: number | null;
-  category: 'class' | 'review' | 'test';
-  priority: 'high' | 'medium' | 'low';
-}
+import { Activity } from '../../shared/interfaces/activity';
+import { CreateScheduleService } from '../../shared/services/create-schedule/create-schedule.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-schedule',
@@ -62,6 +62,11 @@ interface Activity {
   viewProviders: [provideIcons({ phosphorTrashSimple, phosphorStar })],
 })
 export class CreateScheduleComponent {
+  router = inject(Router);
+  createScheduleService = inject(CreateScheduleService);
+
+  showCreateScheduleFailedMessage = signal(false);
+
   createScheduleForm: FormGroup = new FormGroup({});
   activitiesForm: FormGroup = new FormGroup({});
 
@@ -69,7 +74,7 @@ export class CreateScheduleComponent {
 
   ngOnInit() {
     this.createScheduleForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      title: ['', [Validators.required]],
       description: [null, [Validators.required]],
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
@@ -135,7 +140,35 @@ export class CreateScheduleComponent {
     }
   }
 
+  private formatDate(date: string | Date): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   submit() {
-    console.log('entrou aqui');
+    if (this.createScheduleForm.invalid) {
+      return;
+    }
+
+    const title = this.createScheduleForm.value.title as string;
+    const description = this.createScheduleForm.value.description as string;
+    const startDate = this.formatDate(this.createScheduleForm.value.startDate);
+    const endDate = this.formatDate(this.createScheduleForm.value.endDate);
+    const visibility = this.createScheduleForm.value.visibility;
+    const activities = this.createScheduleForm.value.activities;
+
+    this.createScheduleService
+      .execute(title, description, startDate, endDate, visibility, activities)
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/');
+        },
+        error: () => {
+          this.showCreateScheduleFailedMessage.set(true);
+        },
+      });
   }
 }
