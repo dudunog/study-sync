@@ -21,7 +21,7 @@ def schedules(request):
         return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def schedule_detail(request, pk):
     schedule = get_object_or_404(Schedule, pk=pk)
     if request.method == 'GET':
@@ -33,7 +33,7 @@ def schedule_detail(request, pk):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         schedule.delete()
