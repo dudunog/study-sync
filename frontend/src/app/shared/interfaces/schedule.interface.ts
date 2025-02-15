@@ -5,9 +5,9 @@ export type Visibility = 'public' | 'private';
 export interface Schedule {
   created_at: Date;
   description: string;
-  end_date: Date;
+  end_date: string;
   id: number;
-  start_date: Date;
+  start_date: string;
   title: String;
   visibility: Visibility;
   activities: Activity[];

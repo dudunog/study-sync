@@ -11,7 +11,11 @@
 <section data-testid="schedules-list">
   <h1 class="text-center">Meus cronogramas</h1>
 
-  <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="150px">
+  <mat-grid-list
+    [cols]="breakpoint"
+    (window:resize)="onResize($event)"
+    rowHeight="200px"
+  >
     @for (schedule of schedules(); track schedule.title ) {
       <mat-grid-tile>
         <app-schedule-list-item
@@ -19,8 +23,7 @@
           data-testid="completed-list-item"
         ></app-schedule-list-item>
       </mat-grid-tile>
-    }
-    @empty {
+    } @empty {
       <app-no-items class="flex justify-center" />
     }
   </mat-grid-list>

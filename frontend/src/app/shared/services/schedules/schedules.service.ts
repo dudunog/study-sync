@@ -16,27 +16,28 @@ export class SchedulesService {
   httpClient = inject(HttpClient);
 
   getAll(): Observable<Schedule[]> {
-    return this.httpClient.get<Schedule[]>(
-      `${this.baseUrl}/api-auth/schedule`
-    );
+    return this.httpClient.get<Schedule[]>(`${this.baseUrl}/api-auth/schedule`);
   }
 
   getById(id: string): Observable<Schedule> {
     return this.httpClient.get<Schedule>(
-      `${this.baseUrl}/api-auth/schedule/${id}`
+      `${this.baseUrl}/api-auth/schedules/${id}`
     );
   }
 
-  post(payload: ScheduleWithoutId): Observable<Schedule> {
+  post(payload: Omit<ScheduleWithoutId, 'created_at'>): Observable<Schedule> {
     return this.httpClient.post<Schedule>(
       `${this.baseUrl}/api-auth/schedule/`,
       payload
     );
   }
 
-  put(id: string, payload: ScheduleWithoutId): Observable<Schedule> {
+  put(
+    id: string,
+    payload: Omit<ScheduleWithoutId, 'created_at'>
+  ): Observable<Schedule> {
     return this.httpClient.put<Schedule>(
-      `${this.baseUrl}/api-auth/schedule/${id}`,
+      `${this.baseUrl}/api-auth/schedules/${id}`,
       payload
     );
   }
@@ -50,7 +51,7 @@ export class SchedulesService {
 
   delete(id: string): Observable<Schedule> {
     return this.httpClient.delete<Schedule>(
-      `${this.baseUrl}/api-auth/schedule/${id}`
+      `${this.baseUrl}/api-auth/schedules/${id}`
     );
   }
 }

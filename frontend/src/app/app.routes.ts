@@ -35,6 +35,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'schedule/:id',
+        loadComponent: () =>
+          import('./pages/schedule-details/schedule-details.component').then(
+            (m) => m.ScheduleDetailsComponent
+          ),
+      },
+      {
         path: 'profile',
         loadComponent: () =>
           import('./pages/create-schedule/create-schedule.component').then(

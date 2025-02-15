@@ -29,7 +29,7 @@ export class MySchedulesComponent {
   breakpoint = 6;
 
   ngOnInit() {
-    this.breakpoint = window.innerWidth <= 400 ? 1 : 5;
+    this.breakpoint = window.innerWidth <= 400 ? 1 : 4;
 
     this.schedulesService
       .getAll()
@@ -37,6 +37,6 @@ export class MySchedulesComponent {
   }
 
   onResize(event: any) {
-    this.breakpoint = event.target.innerWidth <= 400 ? 1 : 6;
+    this.breakpoint = event.target.innerWidth <= 400 ? 1 : 3;
   }
 }

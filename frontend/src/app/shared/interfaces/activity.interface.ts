@@ -7,4 +7,5 @@ export interface Activity {
   duration: number | null;
   category: Category;
   priority: Priority;
+  schedule: string;
 }
