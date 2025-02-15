@@ -1,10 +1,10 @@
 <section>
-  <h3>Entrar</h3>
+  <h3>Cadastrar-se</h3>
   <form
     class="form"
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
-    data-testid="sign-in-form"
+    data-testid="sign-up-form"
   >
     <mat-form-field>
       <mat-label>Nome de usuário</mat-label>
@@ -12,7 +12,17 @@
         matInput
         placeholder="Digite o nome de usuário"
         formControlName="username"
-        data-testid="sign-in-username"
+        data-testid="sign-up-username"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input
+        matInput
+        placeholder="Digite o e-mail"
+        formControlName="email"
+        data-testid="sign-up-email"
       />
     </mat-form-field>
 
@@ -23,19 +33,19 @@
         type="password"
         placeholder="Digite a senha"
         formControlName="password"
-        data-testid="sign-in-password"
+        data-testid="sign-up-password"
       />
     </mat-form-field>
 
     @if (showAuthFailedMessage()) {
-      <section class="text-error" data-testid="sign-in-auth-failed">
-        Usuário ou senha estão inválidos
+      <section class="text-error" data-testid="sign-up-auth-failed">
+        Senha fraca, tente uma senha mais forte
       </section>
     }
 
     <span class="sign-up-link">
-      Ainda não tem conta?
-      <button mat-button (click)="goToSignUp()">Cadastrar-se</button>
+      Já tem uma conta?
+      <button mat-button (click)="goToSignIn()">Entrar</button>
     </span>
 
     <section class="flex justify-end">
@@ -45,7 +55,7 @@
         type="submit"
         [disabled]="form.invalid"
       >
-        Entrar
+        Criar conta
       </button>
     </section>
   </form>

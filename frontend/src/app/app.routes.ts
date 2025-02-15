@@ -10,6 +10,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'sign-up',
+    loadComponent: () =>
+      import('./pages/sign-up/sign-up.component').then(
+        (m) => m.SignUpComponent
+      ),
+  },
+  {
     path: '',
     canActivate: [isLoggedInGuard],
     children: [
@@ -44,8 +51,8 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadComponent: () =>
-          import('./pages/create-schedule/create-schedule.component').then(
-            (m) => m.CreateScheduleComponent
+          import('./pages/my-profile/my-profile.component').then(
+            (m) => m.MyProfileComponent
           ),
       },
     ],

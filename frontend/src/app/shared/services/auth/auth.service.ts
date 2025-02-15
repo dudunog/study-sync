@@ -26,4 +26,24 @@ export class AuthService {
         })
       );
   }
+
+  signUp(
+    username: string,
+    email: string,
+    password: string
+  ): Observable<TokenResponse> {
+    return this.httpClient
+      .post<TokenResponse>(`${this.baseUrl}/auth/users/`, {
+        username,
+        email,
+        password,
+      })
+      .pipe(
+        catchError(() => {
+          return throwError(
+            () => new Error('An error occurred while signing up.')
+          );
+        })
+      );
+  }
 }

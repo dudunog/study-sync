@@ -1,3 +1,7 @@
+.app-name {
+  margin-left: 10px;
+}
+
 mat-sidenav-content {
   padding: 1rem 2rem;
   height: calc(100vh - 96px);
@@ -14,7 +18,7 @@ mat-nav-list {
 }
 
 mat-list-item {
-  >span {
+  > span {
     display: flex;
     align-items: center;
     gap: 1rem;

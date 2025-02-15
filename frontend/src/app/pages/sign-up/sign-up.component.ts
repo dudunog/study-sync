@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
@@ -5,15 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { SignInService } from '../../shared/services/sign-in/sign-in.service';
-import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { SignUpService } from '../../shared/services/sign-up/sign-up.service';
 
 @Component({
-  selector: 'app-sign-in',
+  selector: 'app-sign-up',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,12 +22,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
   ],
-  templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.scss',
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss',
 })
-export class SignInComponent {
+export class SignUpComponent {
   router = inject(Router);
-  signInService = inject(SignInService);
+  signUpService = inject(SignUpService);
 
   showAuthFailedMessage = signal(false);
 
@@ -35,6 +35,10 @@ export class SignInComponent {
     username: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
+    }),
+    email: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
     }),
     password: new FormControl<string>('', {
       nonNullable: true,
@@ -48,11 +52,12 @@ export class SignInComponent {
     }
 
     const username = this.form.value.username as string;
+    const email = this.form.value.email as string;
     const password = this.form.value.password as string;
 
-    this.signInService.signIn(username, password).subscribe({
+    this.signUpService.signUp(username, email, password).subscribe({
       next: () => {
-        this.router.navigateByUrl('/my-schedules');
+        this.router.navigateByUrl('/sign-in');
       },
       error: () => {
         this.showAuthFailedMessage.set(true);
@@ -60,7 +65,7 @@ export class SignInComponent {
     });
   }
 
-  goToSignUp() {
-    this.router.navigateByUrl('/sign-up');
+  goToSignIn() {
+    this.router.navigateByUrl('/sign-in');
   }
 }
