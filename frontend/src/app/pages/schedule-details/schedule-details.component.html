@@ -1,5 +1,9 @@
 <div class="container">
-  <h6 class="title">Editar cronograma</h6>
+  <div class="header">
+    <h6 class="title">Editar cronograma</h6>
+
+    <button mat-raised-button (click)="removeSchedule()">Remover cronograma</button>
+  </div>
 
   <form class="form" [formGroup]="createScheduleForm" (submit)="submit()">
     <mat-form-field class="example-full-width">
@@ -136,14 +140,14 @@
         atividade!
       </p>
 
-      } @if (showCreateScheduleFailedMessage()) {
+      } @if (showUpdateScheduleFailedMessage()) {
       <section class="text-error" data-testid="create-schedule-failed">
         Houve um erro ao criar o cronograma
       </section>
     }
 
     <button class="create-schedule-button" mat-flat-button>
-      Criar cronograma
+      Salvar cronograma
     </button>
   </form>
 </div>

@@ -6,8 +6,16 @@
   text-align: center;
 }
 
-.title {
+.header {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .title {
+    margin: 0;
+  }
 }
 
 .form {

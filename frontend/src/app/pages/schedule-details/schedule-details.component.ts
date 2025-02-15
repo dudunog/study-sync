@@ -66,7 +66,7 @@ export class ScheduleDetailsComponent {
   router = inject(Router);
   scheduleService = inject(SchedulesService);
 
-  showCreateScheduleFailedMessage = signal(false);
+  showUpdateScheduleFailedMessage = signal(false);
 
   createScheduleForm: FormGroup = new FormGroup({});
   activitiesForm: FormGroup = new FormGroup({});
@@ -137,6 +137,17 @@ export class ScheduleDetailsComponent {
     }
   }
 
+  removeSchedule() {
+    this.scheduleService.delete(this.scheduleId).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/my-schedules');
+      },
+      error: () => {
+        this.showUpdateScheduleFailedMessage.set(true);
+      },
+    });
+  }
+
   submitActivity() {
     if (this.activitiesForm.valid) {
       const activitiesArray = this.createScheduleForm.get('activities')?.value;
@@ -182,7 +193,7 @@ export class ScheduleDetailsComponent {
       .subscribe({
         next: () => {},
         error: () => {
-          this.showCreateScheduleFailedMessage.set(true);
+          this.showUpdateScheduleFailedMessage.set(true);
         },
       });
   }
