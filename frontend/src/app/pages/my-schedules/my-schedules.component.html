@@ -1,0 +1,30 @@
+<section class="flex justify-end py-4">
+  <a
+    appButton="primary"
+    [routerLink]="['/create-schedule']"
+    data-testid="list-create-schedule"
+  >
+    Criar cronograma
+  </a>
+</section>
+
+<section data-testid="schedules-list">
+  <h1 class="text-center">Meus cronogramas</h1>
+
+  <mat-grid-list
+    [cols]="breakpoint"
+    (window:resize)="onResize($event)"
+    rowHeight="200px"
+  >
+    @for (schedule of schedules(); track schedule.title ) {
+      <mat-grid-tile>
+        <app-schedule-list-item
+          [schedule]="schedule"
+          data-testid="completed-list-item"
+        ></app-schedule-list-item>
+      </mat-grid-tile>
+    } @empty {
+      <app-no-items class="flex justify-center" />
+    }
+  </mat-grid-list>
+</section>

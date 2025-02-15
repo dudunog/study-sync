@@ -1,0 +1,14 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <a [routerLink]="['/schedule', schedule().id]">
+      <h5 class="card-title" data-testid="list-item-schedule-title">
+        {{ schedule().title }}
+      </h5>
+    </a>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ schedule().description }}</p>
+
+    <span>{{ schedule().activities.length }} atividades</span>
+  </mat-card-content>
+</mat-card>

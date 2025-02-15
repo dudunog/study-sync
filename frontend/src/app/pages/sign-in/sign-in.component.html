@@ -1,0 +1,52 @@
+<section>
+  <h3>Entrar</h3>
+  <form
+    class="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    data-testid="sign-in-form"
+  >
+    <mat-form-field>
+      <mat-label>Nome de usuário</mat-label>
+      <input
+        matInput
+        placeholder="Digite o nome de usuário"
+        formControlName="username"
+        data-testid="sign-in-username"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Senha</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Digite a senha"
+        formControlName="password"
+        data-testid="sign-in-password"
+      />
+    </mat-form-field>
+
+    @if (showAuthFailedMessage()) {
+      <section class="text-error" data-testid="sign-in-auth-failed">
+        Usuário ou senha estão inválidos
+      </section>
+    }
+
+    <span class="sign-up-link">
+      Ainda não tem conta?
+      <button mat-button (click)="goToSignUp()">Cadastrar-se</button>
+    </span>
+
+    <section class="flex justify-end">
+      <button
+        mat-flat-button
+        appButtonXs="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Entrar
+      </button>
+    </section>
+  </form>
+</section>
